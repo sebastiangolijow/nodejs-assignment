@@ -4,22 +4,7 @@
 // input: [{ team: 'green', name: 'Bob', points: 5, isActive: true }, ...]
 // output: [{ team: 'green', points: 40 }, ...]
 
-const players = require('./__tests__/__data__/players.json')
-
-function eliminarObjetosDuplicados(arr, prop) {
-  var nuevoArray = [];
-  var lookup  = {};
-
-  for (var i in arr) {
-      lookup[arr[i][prop]] = arr[i];
-  }
-
-  for (i in lookup) {
-      nuevoArray.push(lookup[i]);
-  }
-
-  return nuevoArray;
-}
+const players = require('./__tests__/__data__/players.json');
 
 const calculateTeamPoints = (players) => {
   let result = [];
@@ -33,7 +18,15 @@ const calculateTeamPoints = (players) => {
         })
       }
     })
-  return  eliminarObjetosDuplicados(result, 'team');
+    return  result.sort(function (a, b) {
+      if (a.points < b.points) {
+        return 1;
+      }
+      if (a.points > b.points) {
+        return -1;
+      }
+      return 0;
+    });  
 }; 
 
 console.log(calculateTeamPoints(players));
