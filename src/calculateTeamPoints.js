@@ -4,19 +4,38 @@
 // input: [{ team: 'green', name: 'Bob', points: 5, isActive: true }, ...]
 // output: [{ team: 'green', points: 40 }, ...]
 
-const players = require('./__tests__/__data__/players.json');
+const players = require('./__tests__/__data__/players.json')
 
 const calculateTeamPoints = (players) => {
   let result = [];
-    players.map(item => {
-      if(item.isActive === true){
-        result.push({team: item.team, points: 0})
-        result.map(value => {
-          if(item.team === value.team){
-            value.points += item.points
+  	players.map(player => {
+    	const teamExists = result.find((item) => {return item.team == player.team})
+      if(!teamExists) { result.push({team: player.team, points: 0})  }
+    })
+    /* Queda temporariamente
+				[{
+          points: 0,
+          team: "red"
+        }, {
+          points: 0,
+          team: "blue"
+        }, {
+          points: 0,
+          team: "green"
+        }]
+	*/ 
+   players.map(player => {
+      if(player.isActive){
+          for(const item of result) {
+          /* Por cada equipo sumo los puntos  */
+            if(item.team === player.team){
+            	item.points += player.points
+            }
+ 
           }
-        })
-      }
+        
+       }
+     
     })
     return  result.sort(function (a, b) {
       if (a.points < b.points) {
@@ -29,5 +48,4 @@ const calculateTeamPoints = (players) => {
     });  
 }; 
 
-console.log(calculateTeamPoints(players));
-
+console.log(calculateTeamPoints(players))
