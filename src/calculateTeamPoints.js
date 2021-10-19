@@ -3,7 +3,6 @@
 // The output is sorted in descending order by points
 // input: [{ team: 'green', name: 'Bob', points: 5, isActive: true }, ...]
 // output: [{ team: 'green', points: 40 }, ...]
-
 const players = require('./__tests__/__data__/players.json')
 
 const calculateTeamPoints = (players) => {
@@ -34,4 +33,7 @@ const calculateTeamPoints = (players) => {
   })
 }
 
-console.log(calculateTeamPoints(players))
+
+module.exports = {
+  calculateTeamPoints
+}
