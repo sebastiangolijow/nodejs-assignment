@@ -33,6 +33,7 @@ const calculateTeamPoints = (players) => {
   })
 }
 
+console.log(calculateTeamPoints(players))
 
 module.exports = {
   calculateTeamPoints
